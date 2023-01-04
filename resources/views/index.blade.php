@@ -83,7 +83,7 @@
                             <a href="">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
-                            <a href="">
+                            <a href="{{route('index.cart')}}">
                                 <i class="fa fa-cart-plus" aria-hidden="true"></i>
                             </a>
                             <a href="">
@@ -202,7 +202,8 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
         </script>
         <!-- End Google Map -->
-
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+@yield('script')
 </body>
 
 </html>

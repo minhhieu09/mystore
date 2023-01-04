@@ -29,5 +29,7 @@ Route::prefix('/store')->group(function () {
 });
 
 Route::prefix('cart')->group(function () {
-    Route::get('cart',[CartController::class,'Cart']);
+    Route::get('cart',[CartController::class,'Cart'])->name('index.cart');
+    Route::get('detail',[StoreController::class,'Detail'])->name('index.detail');
+    Route::get('add-cart',[StoreController::class,'addcart'])->name('index.add');
 });

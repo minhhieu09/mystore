@@ -2,19 +2,22 @@
 @extends('index')
 @section('content')
     <!-- Content -->
+    
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8">
                 <div style="display: none"></div>
                 <input type="hidden" name="component[]" value="">
+                @foreach ($data as $item)
                 <div class="row">
                     <div class="col-md-3">
                         <img src="" class="img-thumbnail">
                     </div>
+                    
                     <div class="col-md-6">
                         <div class="infor-gio">
-                            <h5></h5>
-                            <p>Giá: VND</p>
+                            <h5 >{{$item['name']}} </h5>
+                            <p>Giá:{{$item['price']}} VND</p>
                             <div class="mau-sanpham">
                                 <div style="width: 30%;">
                                     <h4>Color</h4>
@@ -49,7 +52,8 @@
                         </div>
                     </div>
                 </div>
-
+                @endforeach
+                
                 <input type="hidden" name="total" value="">
 
 

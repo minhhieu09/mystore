@@ -20,7 +20,42 @@ class StoreController extends Controller
         return view('layouts.about');
     }
 
-    public function cart(){
-        
+    public function Detail(){
+        return view('Cart.detail');
+    }
+
+    public function addcart(Request $request){
+        // $request->session()->flush();
+        // dd($request->session()->get('cart'));
+        if($request->session()->has('cart')){
+            $id = $request->id;
+            $cart = $request->session()->get('cart');
+            $check = array_key_exists($id, $cart);
+            if($check){
+                $cart[$id]['amount'] += 1 ;
+            }
+            else{
+                $cart[$request->id] = [
+                    "amount" => 1,
+                    "price" => $request->price,
+                    "name" => $request->name,
+                ];
+                // $cart= array_merge($cart,$new);
+            }
+            $request->session()->put('cart',$cart);
+
+        }
+        else{
+            $data[$request->id] = [
+                "amount" => 1,
+                "price" => $request->price,
+                "name" => $request->name,
+            ];
+            $request->session()->put('cart',$data);
+            
+        }
+
+        // dd($data);
+        return response()->json(['data' =>$request->session()->get('cart')]);
     }
 }

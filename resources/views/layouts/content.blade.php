@@ -121,6 +121,7 @@
                                 <span>
                                     $300
                                 </span>
+                                <a class="btn btn-private" href="{{route('index.detail')}}" >Button</a>
                             </h6>
                         </div>
                         <div class="new">
