@@ -6,6 +6,7 @@ use App\Models\ProductComponentModel;
 use App\Models\ProductsColorModel;
 use Illuminate\Support\Facades\DB;
 use App\Models\ProductsModel;
+use App\Models\ProductTypeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -19,9 +20,34 @@ class StoreController extends Controller
 
         return view('layouts.content', ['products' => $products]);
     }
-    public function Watches()
+    public function Watches(Request $request)
     {
-        return view('layouts.watches');
+        $productType = ProductTypeModel::all();    
+        $priceType = [
+            '1' => 'Dưới 5 triệu',
+            '2' => '5 - 10 triệu',
+            '3' => '10 - 15 triệu',
+            '4' => 'Trên 20 triệu',
+        ];
+        $input = $request->all();
+        $product = [];
+        if(!empty($input)){
+
+            if($input['product_name'] == null && $input['price'] == null){
+                $product = ProductsModel::all();
+            }
+            elseif($input['product_name'] != null && $input['price'] == null){
+                $product = ProductsModel::where('type','=', $input['product_name'])->get();
+            }
+            elseif($input['product_name'] == null && $input['price'] != null){
+                $product = $this->searchPrice($input);
+            }else{
+                $productByPrice = $this->searchPrice($input);
+                $product = $productByPrice->where('type','=', $input['product_name']);
+            }
+
+        }
+        return view('layouts.watches',['productType'=>$productType,'priceType'=>$priceType,'product'=>$product]);
     }
     public function Contact()
     {
@@ -112,4 +138,36 @@ class StoreController extends Controller
         // dd($data);
         return response()->json(['data' => Session::get('cart')]);
     }
+
+    public function searchPrice($input){
+                switch($input['price']){
+                    case "1":
+                        $start = 0;
+                        $end = 5000000;
+                        break;
+                    case "2":
+                        $start = 5000000;
+                        $end = 10000000;
+                        break;
+                    case "3":
+                        $start = 10000000;
+                        $end = 15000000;
+                        break;
+                    case "4":
+                        $start = 20000000;
+                        $end = 100000000;
+                        break;
+                    default:
+                        $start = 0;
+                        $end = 5000000;
+                }
+
+                $product = ProductsModel::whereHas('productcomponent', function($query) use ($start, $end){
+                    $query->where('price', '>=', $start)
+                        ->where('price', '<', $end);
+                })->get();        
+                return $product;           
+    }
+
+
 }

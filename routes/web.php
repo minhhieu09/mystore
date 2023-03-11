@@ -47,6 +47,9 @@ Route::prefix('/')->group(function () {
     Route::get('/about', [StoreController::class, 'About'])->name('index.about');
 });
 
+Route::get('search-product',[StoreController::class,'searchProduct'])->name('search.product');
+
+
 Route::prefix('cart')->group(function () {
     Route::get('', [StoreController::class, 'cart'])->name('index.cart');
     Route::get('cart-session',[StoreController::class,'getCartSession']);

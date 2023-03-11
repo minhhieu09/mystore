@@ -2,51 +2,51 @@
 @section('content')
     <section class="shop_section layout_padding">
         <div class="container">
+            <div class="row" >
+                <div class="col-12 text-center">
+                    <form action="{{route('index.watches')}}" method="Get">
+                        <select name="product_name" id="">
+                            <option value="">Chon dòng sản phẩm</option>
+                            @foreach ($productType as $item)
+                                <option value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+                        </select>
+                        <select name="price" id="">
+                            <option value="">Chọn giá tiền</option>
+                            @foreach ($priceType as $key => $item)
+                                <option value="{{$key}}">{{$item}}</option>
+                            @endforeach
+                        </select>
+                        <button class="btn btn-success">Tim kiem</button>
+                    </form>
+                </div>
+                
+            </div>
             <div class="heading_container heading_center">
+
                 <h2>
                     Latest Phone
                 </h2>
             </div>
             <div class="row">
-                <div class="col-md-6 ">
-                    <div class="box">
-                        <a href="">
-                            <div class="img-box">
-                                <img src="{{asset('images/w1.png')}}" alt="">
-                            </div>
-                            <div class="detail-box">
-                                <h6>
-                                    SmartPhone
-                                </h6>
-                                <h6>
-                                    Price:
-                                    <span>
-                                        $300
-                                    </span>
-                                </h6>
-                            </div>
-                            <div class="new">
-                                <span>
-                                    Featured
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                @if (isset($product))
+                    
+                @foreach ($product as $item)
+                
                 <div class="col-sm-6 col-xl-3">
                     <div class="box">
                         <a href="">
                             <div class="img-box">
-                                <img src="{{asset('images/w2.png')}}" alt="">
+                                <img src="{{$item->productcomponent->first()->image }}" alt="">
                             </div>
                             <div class="detail-box">
                                 <h6>
-                                    SmartPhone
+                                    {{$item->name}}
                                 </h6>
                                 <h6>
                                     Price:
                                     <span>
-                                        $125
+                                        {{$item->productcomponent->first()->price}}
                                     </span>
                                 </h6>
                             </div>
@@ -58,131 +58,10 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="box">
-                        <a href="">
-                            <div class="img-box">
-                                <img src="{{asset('images/w3.png')}}" alt="">
-                            </div>
-                            <div class="detail-box">
-                                <h6>
-                                    SmartPhone
-                                </h6>
-                                <h6>
-                                    Price:
-                                    <span>
-                                        $110
-                                    </span>
-                                </h6>
-                            </div>
-                            <div class="new">
-                                <span>
-                                    New
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="box">
-                        <a href="">
-                            <div class="img-box">
-                                <img src="{{asset('images/w4.png')}}" alt="">
-                            </div>
-                            <div class="detail-box">
-                                <h6>
-                                    SmartPhone
-                                </h6>
-                                <h6>
-                                    Price:
-                                    <span>
-                                        $145
-                                    </span>
-                                </h6>
-                            </div>
-                            <div class="new">
-                                <span>
-                                    New
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="box">
-                        <a href="">
-                            <div class="img-box">
-                                <img src="{{asset('images/w5.png')}}" alt="">
-                            </div>
-                            <div class="detail-box">
-                                <h6>
-                                    SmartPhone
-                                </h6>
-                                <h6>
-                                    Price:
-                                    <span>
-                                        $195
-                                    </span>
-                                </h6>
-                            </div>
-                            <div class="new">
-                                <span>
-                                    New
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6  col-xl-3">
-                    <div class="box">
-                        <a href="">
-                            <div class="img-box">
-                                <img src="{{asset('images/w6.png')}}" alt="">
-                            </div>
-                            <div class="detail-box">
-                                <h6>
-                                    SmartPhone
-                                </h6>
-                                <h6>
-                                    Price:
-                                    <span>
-                                        $170
-                                    </span>
-                                </h6>
-                            </div>
-                            <div class="new">
-                                <span>
-                                    New
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3">
-                    <div class="box">
-                        <a href="">
-                            <div class="img-box">
-                                <img src="{{asset('images/w1.png')}}" alt="">
-                            </div>
-                            <div class="detail-box">
-                                <h6>
-                                    SmartPhone
-                                </h6>
-                                <h6>
-                                    Price:
-                                    <span>
-                                        $230
-                                    </span>
-                                </h6>
-                            </div>
-                            <div class="new">
-                                <span>
-                                    New
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
+                @endif
+                    
+                
             </div>
             <div class="btn-box">
                 <a href="">
