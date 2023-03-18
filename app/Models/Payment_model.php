@@ -16,7 +16,7 @@ class Payment_model extends Model
         'customer_id',
         'total',
         'payment_type',
-        'payment_infor',
+        'payment_info',
         'status',
     ];
 }

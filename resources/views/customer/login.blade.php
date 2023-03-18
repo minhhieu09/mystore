@@ -31,7 +31,7 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form method="POST" action="{{ route('index.store')}}" id="customer-login">
+                    <form method="POST" action="{{ route('customer.login')}}" id="customer-login">
                         @csrf
                         <h1>Login Form</h1>
                         @include('common.noti_message')
@@ -92,7 +92,7 @@
                                 required="" />
                         </div>
                         <div>
-                            <input type="submit" value="Signup">
+                            <button type="submit">Signup</button>
                         </div>
 
                         <div class="clearfix"></div>

@@ -125,7 +125,11 @@
                                     <span>VND</span>
                                 </p>
                             </div>
+                                @if(Auth::guard('web')->check())
                                 <button class="btn btn-warning" type="submit">THANH TOÁN</button>
+                                @else
+                                <a class="btn btn-warning"  href="{{route('customer.login')}}">THANH TOÁN </a>  
+                                @endif
                         </div>
                     </div>
                 </div>

@@ -50,7 +50,7 @@ Route::prefix('/')->group(function () {
 });
 
 Route::get('search-product',[StoreController::class,'searchProduct'])->name('search.product');
-
+Route::get('info',[CustomerController::class,'customerInfo'])->name('customer.info');
 
 Route::prefix('cart')->group(function () {
     Route::get('', [StoreController::class, 'cart'])->name('index.cart');
@@ -78,8 +78,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
 Route::prefix('customer')->group(function(){
     Route::post('signup',[CustomerController::class,'signup'])->name('customer.signup');
-    Route::get('login',[CustomerController::class,'login'])->name('customer.login');
+    Route::get('login',[CustomerController::class,'login']);
     Route::post('login',[CustomerController::class,'login'])->name('customer.login');
+    Route::get('logout',[CustomerController::class,'logout'])->name('customer.logout');
 });
 
 Route::get('login', function () {
@@ -91,3 +92,4 @@ Route::get('logout', [AdminController::class, 'loginout'])->name('admin.loginout
 
 
 Route::post('payment',[PaymentController::class,'payment'])->name('store.payment');
+Route::get('payment-success',[PaymentController::class,'paymentSuccess'])->name('payment.success');

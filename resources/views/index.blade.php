@@ -84,9 +84,16 @@
                             </li>
                         </ul>
                         <div class="user_option-box">
-                            <a href="{{route('customer.login')}}">
-                                <i class="fa fa-user" aria-hidden="true" ></i>
-                            </a>
+                            {{-- {{dd((auth()->guard('web')->check()))}} --}}
+                            @if (Auth::guard('web')->check())
+                                <a href="{{route('customer.info')}}">
+                                    <i class="fa fa-user" aria-hidden="true" ></i>
+                                </a>
+                            @else
+                                <a href="{{route('customer.login')}}">
+                                    <i class="fa fa-user" aria-hidden="true" ></i>
+                                </a>  
+                            @endif
                             <a href="{{ route('index.cart') }}">
                                 <i class="fa fa-cart-plus" aria-hidden="true"></i>
                             </a>
