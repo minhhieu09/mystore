@@ -1,6 +1,0 @@
-@section('main')
-
-
-
-
-@endsection
