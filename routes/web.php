@@ -54,7 +54,7 @@ Route::prefix('cart')->group(function () {
 Route::prefix('admin')->middleware('admin')->group(function () {
     //Dashboard
     Route::get('dashboard',[DashboardController::class, 'InfoTotal'])->name('info.dashboard');
-
+    Route::get('detail-product',[ListingController::class,'detailProduct'])->name('info.detail');
 
     Route::get('/', [AdminController::class, 'dashboard'])->name('index.dashboard');
     Route::get('/listing',[ListingController::class, 'index'])->name('listing.index');

@@ -82,6 +82,7 @@ class StoreController extends Controller
         $request = $request->id;
         $assign['product'] = ProductsModel::where('id', $id)->first();
         $assign['component'] = $assign['product']->productcomponent->first();
+        // dd($assign['component']);
         $name = $assign['product']->name;
         $assign['sameProduct'] = ProductsModel::where('id', '!=', $id)->where('type', $assign['product']->type)->where('status', 1)->take(4)->get();
         // $name = $assign['product']->name;
@@ -98,7 +99,7 @@ class StoreController extends Controller
     public function getmemory(Request $request)
     {
         $dataRequest = $request->all();
-        $memory = ProductComponentModel::where('product_id', $dataRequest['id'])->where('color_id', $dataRequest['color'])->get();
+        $memory = ProductComponentModel::where('product_id', $dataRequest['id'])->where('color_id', $dataRequest['color'])->where('amount' ,'>=' ,1)->get();
 
         return response()->json(['data' => $memory]);
     }

@@ -1,6 +1,7 @@
 @extends('index')
 @section('content')
     <!-- Content -->
+    <div id="notice" class="alert alert-warning"></div>
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
@@ -71,9 +72,9 @@
                                         </div>
                                     </li>
                                     <li>
-                                        @foreach ($product->productcomponent as $key => $item)
-                                            <h3>{{ $item->price }}VND</h3>
-                                        @endforeach
+                                        
+                                            <h3>{{ $product->productcomponent->first()->price }}VND</h3>
+                                        
                                     </li>
                                     <hr>
                                     <li>
@@ -169,9 +170,13 @@
 @endsection
 @section('script')
     <script type="text/javascript">
+        $(document).ready(function(){
+            getMemory();
+            
+        })
         function getMemory() {
             var form = $('form').serializeArray();
-
+            // console.log(form);
             $.ajax({
                 type: "get",
                 url: "{{route('get-memory') }}",
@@ -180,10 +185,11 @@
                     "color": form[2].value,
                 },
                 success: function(e) {
+                    // console.log(e.data);
+
                     if (e) {
                         var html = '';
                         $.each(e.data, function(key, value) {
-                            // console.log(value);
                             html += '<div class="form-group">' +
                                 '<div class="item" data-component="' + value.id + '">' +
                                 '<span>' +
@@ -200,6 +206,8 @@
                         $('.product-option').find('.form-group').remove();
                         $('.product-option').find('.options').append(html);
                     }
+                    $('#notice').text('Sản phẩm đã hết hàng vui lòng chọn sản phẩm khác ');
+
                 }
             });
         }

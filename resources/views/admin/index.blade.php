@@ -5,7 +5,7 @@
     <div class="container-fluid p-0" style="height:100%;">
         <h1 class="h3 mb-3"><strong>Thống kê</strong> Thông tin</h1>
 
-        <div class="row">
+        <div class="row" >
             <div class="col-xl-6 col-xxl-5 d-flex">
                 <div class="w-100">
                     <div class="row">
@@ -93,6 +93,29 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-xxl-5 d-flex">
+                <div class="card" style="height:200px">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mt-0">
+                                <h5 class="card-title">Sản phẩm sắp hết</h5>
+                            </div>
+                            <div class="col-auto">
+                                <div class="stat text-primary">
+                                    <i class="align-middle" data-feather="truck"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-12 " style="display:flex ; justify-content:center">
+                                <a href="{{route('info.detail')}}" class="btn btn-primary"> Chi tiết </a>
+                            </div>
+                        </div>
+                        <h1 class="mt-1 mb-3" id="delivery"></h1>
+                        
                     </div>
                 </div>
             </div>

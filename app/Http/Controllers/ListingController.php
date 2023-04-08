@@ -24,4 +24,22 @@ class ListingController extends Controller
 
         ]);
     }
+    public function detailProduct(Request $request){
+        $adminUser = Auth::guard('admins')->user();
+        $data = ProductsModel::whereHas('productcomponent', function ($q) {
+            $q->where('amount', '<=', 3);
+        })
+        ->paginate(5);
+        $data = $data->appends($request->all());
+        if($key = $request->key){
+            $data = ProductsModel::orderBy('id','DESC')->where('name','like','%' . $key.'%')->paginate(5);
+        }
+        
+        return view('admin.Product Soled.detail',[
+            'user' => $adminUser,
+            // 'records' => $records,
+            'data'=> $data,
+
+        ]);
+    }
 }

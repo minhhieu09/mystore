@@ -29,9 +29,13 @@ class PaymentController extends Controller
         foreach($dataRequest['component'] as $key => $value){
 
             $component = ProductComponentModel::where('id', $value)->first();
+            
             if ($component->amount < $dataRequest['amount'][$key]) {
+
                 return back()->with(['status' => 'fail', 'message' => 'Thanh toán thất bại do hết hàng']);
             }
+            $component->amount -= $dataRequest['amount'][$key];
+            $component->save();
             $paymentInfo[]=[
                 'component' => $value,
                 'amount'    => $dataRequest['amount'][$key],
